@@ -1,12 +1,10 @@
 package hello.springmvc.basic.request;
 
+import hello.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -99,6 +97,24 @@ public class RequestParamController {
     public String requestParamMap(@RequestParam MultiValueMap<String, Object> paramMap){
         //MultiValueMap={key=[value1, value2, ...], key=[value1, value2, ...]}
         log.info("MultiValueMap={}", paramMap);
+        return "ok";
+    }
+
+    //@ModelAttribute parameter를 객체로 받을 수 있음
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+        log.info("helloData={}", helloData);
+
+        return "ok";
+    }
+
+    //@ModelAttribute를 생략한 형태도 가능함
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData) {
+        log.info("helloData={}", helloData);
+
         return "ok";
     }
 }
